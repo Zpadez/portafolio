@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Facturación</title>
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+
+<div class="blueprint-grid" aria-hidden="true"></div>
+
+<!-- PANTALLA DE LOGIN -->
+<section id="loginScreen" class="login-screen">
+  <form id="loginForm" class="login-card">
+    <p class="sheet-label">ACCESO RESTRINGIDO</p>
+    <h1 class="section-title" style="font-size:1.5rem;">Panel de administrador</h1>
+    <label class="form-field">
+      <span>Contraseña</span>
+      <input type="password" id="loginPassword" required autocomplete="current-password">
+    </label>
+    <button type="submit" class="btn btn--primary btn--full">Entrar</button>
+    <p class="form-status" id="loginStatus"></p>
+  </form>
+</section>
+
+<!-- PANEL DE ADMINISTRADOR -->
+<div id="adminPanel" class="admin-panel hidden">
+
+  <header class="admin-header">
+    <a href="index.html" class="brand">TONY<span class="brand-dot">.</span><span class="brand-tag">admin</span></a>
+    <button id="logoutBtn" class="btn btn--ghost">Cerrar sesión</button>
+  </header>
+
+  <main class="admin-main">
+    <p class="sheet-label">HOJA A — NUEVA FACTURA</p>
+    <h2 class="section-title">Crear factura</h2>
+
+    <form id="invoiceForm" class="invoice-form">
+      <div class="form-grid">
+        <label class="form-field">
+          <span>Nombre del cliente</span>
+          <input type="text" id="fCliente" required>
+        </label>
+
+        <label class="form-field">
+          <span>Nombre de la marca</span>
+          <input type="text" id="fMarca" required>
+        </label>
+
+        <label class="form-field">
+          <span>Plan contratado</span>
+          <select id="fPlan" required>
+            <option value="" disabled selected>Selecciona un plan</option>
+            <option value="Básico">Básico</option>
+            <option value="Profesional">Profesional</option>
+            <option value="Premium">Premium</option>
+            <option value="Personalizado">Personalizado</option>
+          </select>
+        </label>
+
+        <label class="form-field">
+          <span>Fecha</span>
+          <input type="date" id="fFecha" required>
+        </label>
+
+        <label class="form-field">
+          <span>Monto en USD</span>
+          <input type="number" id="fMontoUsd" min="0" step="0.01" placeholder="0.00" required>
+        </label>
+
+        <label class="form-field">
+          <span>Moneda local</span>
+          <select id="fMoneda" required>
+            <option value="" disabled selected>Selecciona moneda</option>
+            <option value="GTQ">GTQ — Quetzal (Guatemala)</option>
+            <option value="MXN">MXN — Peso mexicano</option>
+            <option value="COP">COP — Peso colombiano</option>
+            <option value="CLP">CLP — Peso chileno</option>
+            <option value="PEN">PEN — Sol peruano</option>
+            <option value="ARS">ARS — Peso argentino</option>
+            <option value="VES">VES — Bolívar (Venezuela)</option>
+            <option value="USD">USD — Dólar (sin conversión)</option>
+            <option value="OTRA">Otra</option>
+          </select>
+        </label>
+
+        <label class="form-field">
+          <span>Monto en moneda local</span>
+          <input type="number" id="fMontoLocal" min="0" step="0.01" placeholder="0.00" required>
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn--primary">Guardar factura</button>
+      <p class="form-status" id="invoiceStatus"></p>
+    </form>
+
+    <div class="section-divider"></div>
+
+    <p class="sheet-label">HOJA B — FACTURAS EMITIDAS</p>
+    <h2 class="section-title">Historial</h2>
+
+    <div class="table-wrap">
+      <table class="invoice-table" id="invoiceTable">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Marca</th>
+            <th>Plan</th>
+            <th>USD</th>
+            <th>Local</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="invoiceTableBody">
+          <!-- filas generadas por JS -->
+        </tbody>
+      </table>
+      <p class="empty-state" id="emptyState">Todavía no has creado ninguna factura.</p>
+    </div>
+  </main>
+</div>
+
+<!-- VISTA IMPRIMIBLE DE FACTURA -->
+<section id="invoicePrintView" class="invoice-print-view hidden">
+  <div class="invoice-sheet">
+    <header class="invoice-sheet-header">
+      <div>
+        <p class="invoice-brand">TONY.dev</p>
+        <p class="invoice-sub">Desarrollo web</p>
+      </div>
+      <div class="invoice-meta">
+        <p><strong>Factura N.º</strong> <span id="pvNumero"></span></p>
+        <p><strong>Fecha</strong> <span id="pvFecha"></span></p>
+      </div>
+    </header>
+
+    <div class="invoice-parties">
+      <div>
+        <p class="invoice-label">Cliente</p>
+        <p id="pvCliente" class="invoice-value"></p>
+      </div>
+      <div>
+        <p class="invoice-label">Marca</p>
+        <p id="pvMarca" class="invoice-value"></p>
+      </div>
+    </div>
+
+    <table class="invoice-detail-table">
+      <thead>
+        <tr><th>Concepto</th><th>Monto USD</th><th>Monto local</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Plan <span id="pvPlan"></span></td>
+          <td id="pvMontoUsd"></td>
+          <td id="pvMontoLocal"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <footer class="invoice-sheet-footer">
+      <p>Gracias por confiar en TONY.dev</p>
+    </footer>
+  </div>
+
+  <div class="invoice-print-actions">
+    <button id="printBtn" class="btn btn--primary">Imprimir / Guardar PDF</button>
+    <button id="closePrintBtn" class="btn btn--ghost">Cerrar</button>
+  </div>
+</section>
+
+<script src="js/admin.js"></script>
+</body>
+</html>
