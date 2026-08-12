@@ -1,0 +1,257 @@
+/* Reutiliza los tokens definidos en styles.css (:root) */
+
+.hidden { display: none !important; }
+
+/* ============================================
+   LOGIN
+============================================ */
+.login-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.login-card {
+  background: var(--panel-navy);
+  border: 1px solid var(--line-cyan-dim);
+  border-radius: var(--radius);
+  padding: 36px;
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ============================================
+   ADMIN LAYOUT
+============================================ */
+.admin-header {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line-cyan-dim);
+}
+
+.admin-main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 40px 24px 96px;
+}
+
+.section-divider {
+  height: 1px;
+  background: var(--line-cyan-dim);
+  margin: 56px 0 40px;
+}
+
+/* ============================================
+   FORM
+============================================ */
+.invoice-form {
+  background: var(--panel-navy);
+  border: 1px solid var(--line-cyan-dim);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.form-field select {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  background: var(--ink-navy);
+  border: 1px solid var(--line-cyan-dim);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  color: var(--paper);
+}
+.form-field select:focus { border-color: var(--line-cyan); outline: none; }
+
+/* ============================================
+   TABLE
+============================================ */
+.table-wrap { overflow-x: auto; }
+
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.invoice-table th,
+.invoice-table td {
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line-cyan-dim);
+  white-space: nowrap;
+}
+
+.invoice-table th {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--line-cyan);
+}
+
+.invoice-table tbody tr:hover { background: rgba(111, 168, 199, 0.06); }
+
+.row-actions { display: flex; gap: 10px; }
+
+.icon-btn {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  background: none;
+  border: 1px solid var(--line-cyan-dim);
+  color: var(--paper);
+  border-radius: var(--radius);
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.icon-btn:hover { border-color: var(--line-cyan); }
+.icon-btn--danger:hover { border-color: var(--copper-bright); color: var(--copper-bright); }
+
+.empty-state {
+  color: var(--slate);
+  font-size: 0.9rem;
+  padding: 24px 0;
+  text-align: center;
+}
+
+/* ============================================
+   VISTA IMPRIMIBLE DE FACTURA
+============================================ */
+.invoice-print-view {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(13, 27, 42, 0.92);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
+  padding: 48px 20px;
+  overflow-y: auto;
+}
+
+.invoice-sheet {
+  background: var(--paper);
+  color: var(--ink-navy);
+  width: 100%;
+  max-width: 640px;
+  padding: 48px;
+  border-radius: 4px;
+}
+
+.invoice-sheet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 2px solid var(--ink-navy);
+  padding-bottom: 20px;
+  margin-bottom: 28px;
+}
+
+.invoice-brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin: 0;
+}
+.invoice-sub {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #5b6b78;
+  margin: 4px 0 0;
+}
+
+.invoice-meta {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-align: right;
+}
+.invoice-meta p { margin: 0 0 4px; }
+
+.invoice-parties {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.invoice-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #5b6b78;
+  margin: 0 0 6px;
+}
+.invoice-value {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.invoice-detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 32px;
+}
+.invoice-detail-table th,
+.invoice-detail-table td {
+  text-align: left;
+  padding: 12px 0;
+  border-bottom: 1px solid #d8d4c8;
+  font-size: 0.92rem;
+}
+.invoice-detail-table th {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  color: #5b6b78;
+}
+
+.invoice-sheet-footer {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: #5b6b78;
+  text-align: center;
+}
+
+.invoice-print-actions {
+  display: flex;
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .invoice-parties { grid-template-columns: 1fr; }
+  .invoice-sheet { padding: 28px; }
+}
+
+/* Al imprimir, solo se ve la hoja de factura */
+@media print {
+  body * { visibility: hidden; }
+  .invoice-sheet, .invoice-sheet * { visibility: visible; }
+  .invoice-sheet {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: none;
+  }
+  .invoice-print-actions, .blueprint-grid { display: none !important; }
+}

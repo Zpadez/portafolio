@@ -121,13 +121,15 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 .nav-link:hover { color: var(--paper); }
 
-.nav-link--cta {
+.nav-link--cta,
+.btn--cta {
   color: var(--copper-bright);
   border: 1px solid var(--copper);
   padding: 8px 16px;
   border-radius: var(--radius);
 }
-.nav-link--cta:hover {
+.nav-link--cta:hover,
+.btn--cta:hover {
   background: var(--copper);
   color: var(--paper);
 }
