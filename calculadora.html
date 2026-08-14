@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tony — Desarrollador Web Front-End</title>
+    <meta
+      name="description"
+      content="Portafolio de Tony, desarrollador web front-end. Sitios a medida en HTML, CSS y JavaScript para negocios reales."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="blueprint-grid" aria-hidden="true"></div>
+
+    <main>
+      <!-- CALCULADORA DE SERVICIOS -->
+      <section id="calculadora" class="section">
+        <h2 class="section-title">Estima tu proyectos.</h2>
+        <p class="hero-sub" style="margin-bottom: 32px">
+          Una referencia rápida de inversión según el tipo de sitio que
+          necesitas. Es una estimación, no una cotización cerrada — para eso,
+          hablamos por la sección de contacto.
+        </p>
+
+        <div class="calc-card">
+          <form id="calcForm" class="calc-form">
+            <div class="calc-grid">
+              <label class="form-field">
+                <span class="field-label">Tipo de proyecto</span>
+                <span class="field-hint"></span>
+                <select id="calcTipo" required>
+                  <option value="" disabled selected>Selecciona un tipo</option>
+                  <option value="landing">Landing Page</option>
+                  <option value="portafolio">Portafolio</option>
+                  <option value="ecommerce">E-commerce</option>
+                </select>
+              </label>
+
+              <label class="form-field">
+                <span class="field-label">Páginas adicionales</span>
+                <span class="field-hint"
+                  >Páginas extras para información adicional en la web, ejemplo:
+                  Blog, Galería, Foros, etc.</span
+                >
+                <input
+                  type="number"
+                  id="calcPaginasExtra"
+                  min="0"
+                  step="1"
+                  value="0"
+                />
+              </label>
+
+              <div class="form-field" id="calcProductosField" hidden>
+                <span class="field-label">Cantidad de productos</span>
+                <span class="field-hint"
+                  >Solo aplica para proyectos de e-commerce.</span
+                >
+                <input
+                  type="number"
+                  id="calcProductos"
+                  min="0"
+                  step="1"
+                  value="0"
+                />
+              </div>
+            </div>
+
+            <div class="calc-check-section">
+              <span class="field-label">Integraciones extra</span>
+              <span class="field-hint"
+                >Selecciona todas las que apliquen a tu proyecto.</span
+              >
+              <div class="calc-check-grid" id="calcIntegracionesGrid">
+                <label class="calc-check">
+                  <input type="checkbox" name="integraciones" value="whatsapp" />
+                  <span class="calc-check-box" aria-hidden="true"></span>
+                  <span class="calc-check-text">Chat de WhatsApp</span>
+                </label>
+                <label class="calc-check">
+                  <input type="checkbox" name="integraciones" value="instagram" />
+                  <span class="calc-check-box" aria-hidden="true"></span>
+                  <span class="calc-check-text">Perfil de Instagram</span>
+                </label>
+                <label class="calc-check">
+                  <input type="checkbox" name="integraciones" value="pagos" />
+                  <span class="calc-check-box" aria-hidden="true"></span>
+                  <span class="calc-check-text"
+                    >Sistema de pagos
+                    <span class="calc-check-note"
+                      >(un sistema específico para tu país puede aumentar el
+                      valor)</span
+                    ></span
+                  >
+                </label>
+                <label class="calc-check">
+                  <input type="checkbox" name="integraciones" value="soporte" />
+                  <span class="calc-check-box" aria-hidden="true"></span>
+                  <span class="calc-check-text">Chat de soporte</span>
+                </label>
+                <label class="calc-check">
+                  <input type="checkbox" name="integraciones" value="blog" />
+                  <span class="calc-check-box" aria-hidden="true"></span>
+                  <span class="calc-check-text">Blog</span>
+                </label>
+                <label class="calc-check">
+                  <input type="checkbox" name="integraciones" value="foro" />
+                  <span class="calc-check-box" aria-hidden="true"></span>
+                  <span class="calc-check-text">Foro</span>
+                </label>
+                <label class="calc-check">
+                  <input type="checkbox" name="integraciones" value="galeria" />
+                  <span class="calc-check-box" aria-hidden="true"></span>
+                  <span class="calc-check-text">Galería de imágenes</span>
+                </label>
+              </div>
+            </div>
+
+            <label class="calc-toggle">
+              <input type="checkbox" id="calcAdmin" />
+              <span class="calc-toggle-track" aria-hidden="true">
+                <span class="calc-toggle-thumb"></span>
+              </span>
+              <span class="calc-toggle-text"
+                >Necesito panel de administración</span
+              >
+            </label>
+
+            <button type="submit" class="btn btn--primary">
+              Calcular estimado
+            </button>
+          </form>
+
+          <div class="calc-result" id="calcResult" hidden>
+            <span class="calc-result-label">Inversión estimada</span>
+            <strong class="calc-result-value" id="calcResultValue"
+              >$0 USD</strong
+            >
+            <span class="calc-result-hint" id="calcResultHint"></span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="reg-mark reg-mark--bl" aria-hidden="true">+</div>
+      <div class="reg-mark reg-mark--br" aria-hidden="true">+</div>
+      <p>
+        © <span id="year"></span> Tony — Desarrollador Web. Hecho con HTML, CSS
+        y JS.
+      </p>
+    </footer>
+
+    <script src="js/calculadora.js"></script>
+  </body>
+</html>

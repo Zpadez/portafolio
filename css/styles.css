@@ -121,15 +121,13 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 .nav-link:hover { color: var(--paper); }
 
-.nav-link--cta,
-.btn--panel {
+.nav-link--cta {
   color: var(--copper-bright);
   border: 1px solid var(--copper);
   padding: 8px 16px;
   border-radius: var(--radius);
 }
-.nav-link--cta:hover,
-.btn--panel:hover {
+.nav-link--cta:hover {
   background: var(--copper);
   color: var(--paper);
 }
@@ -432,6 +430,247 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 
 /* ============================================
+   CALCULADORA DE SERVICIOS
+============================================ */
+.calc-card {
+  background: var(--panel-navy);
+  border: 1px solid var(--line-cyan-dim);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px 24px;
+  margin-bottom: 28px;
+  align-items: stretch;
+}
+
+/* Every field shares the same internal structure (label / hint / control),
+   so every row lines up even when a hint is short, long, or absent. */
+.calc-grid .form-field {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+/* Higher specificity than the rule above on purpose: without this, a
+   field's own [hidden] attribute loses to .calc-grid .form-field's
+   display:flex and the field never actually disappears. */
+.calc-grid .form-field[hidden] {
+  display: none;
+}
+.calc-grid .field-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--slate);
+  margin-bottom: 8px;
+}
+.calc-grid .field-hint {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--slate);
+  opacity: 0.75;
+  min-height: 2.2em;
+  margin-bottom: 8px;
+}
+.calc-grid select,
+.calc-grid input[type="number"] {
+  margin-top: auto;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  background: var(--ink-navy);
+  border: 1px solid var(--line-cyan-dim);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  color: var(--paper);
+  width: 100%;
+}
+.calc-grid select:focus,
+.calc-grid input[type="number"]:focus {
+  border-color: var(--line-cyan);
+  outline: none;
+}
+
+/* Integraciones extra — grupo de checkboxes a todo el ancho, fuera
+   de la grilla de 2 columnas para dejarles espacio a los textos. */
+.calc-check-section {
+  margin-bottom: 28px;
+}
+.calc-check-section .field-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--slate);
+  margin-bottom: 8px;
+}
+.calc-check-section .field-hint {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--slate);
+  opacity: 0.75;
+  margin-bottom: 14px;
+}
+
+.calc-check-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 24px;
+}
+
+.calc-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.calc-check input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.calc-check-box {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  border-radius: 4px;
+  background: var(--ink-navy);
+  border: 1px solid var(--line-cyan-dim);
+  position: relative;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.calc-check-box::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid var(--paper);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.calc-check input:checked + .calc-check-box {
+  background: var(--copper);
+  border-color: var(--copper-bright);
+}
+.calc-check input:checked + .calc-check-box::after {
+  opacity: 1;
+}
+.calc-check input:focus-visible + .calc-check-box {
+  outline: 2px solid var(--copper-bright);
+  outline-offset: 3px;
+}
+.calc-check:hover .calc-check-box {
+  border-color: var(--line-cyan);
+}
+.calc-check-text {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--paper);
+  line-height: 1.4;
+}
+.calc-check-note {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--slate);
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+/* Admin panel toggle — its own full-width row, switch and label side by side */
+.calc-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  margin-bottom: 24px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.calc-toggle input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.calc-toggle-track {
+  flex-shrink: 0;
+  width: 40px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--ink-navy);
+  border: 1px solid var(--line-cyan-dim);
+  position: relative;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.calc-toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--slate);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.calc-toggle input:checked + .calc-toggle-track {
+  background: var(--copper);
+  border-color: var(--copper-bright);
+}
+.calc-toggle input:checked + .calc-toggle-track .calc-toggle-thumb {
+  transform: translateX(16px);
+  background: var(--paper);
+}
+.calc-toggle input:focus-visible + .calc-toggle-track {
+  outline: 2px solid var(--copper-bright);
+  outline-offset: 3px;
+}
+.calc-toggle-text {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--paper);
+}
+
+.calc-result {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line-cyan-dim);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.calc-result-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--line-cyan);
+}
+.calc-result-value {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  color: var(--copper-bright);
+}
+.calc-result-hint {
+  color: var(--slate);
+  font-size: 0.88rem;
+}
+
+/* ============================================
    CONTACTO
 ============================================ */
 .contact-grid {
@@ -522,6 +761,9 @@ ul { list-style: none; margin: 0; padding: 0; }
   .projects-grid { grid-template-columns: 1fr; }
   .skills-grid { grid-template-columns: repeat(2, 1fr); }
   .contact-grid { grid-template-columns: 1fr; }
+  .calc-grid { grid-template-columns: 1fr; }
+  .calc-check-grid { grid-template-columns: 1fr; }
+  .calc-grid .field-hint { min-height: 0; }
 }
 
 @media (max-width: 720px) {
