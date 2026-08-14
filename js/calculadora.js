@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function costoPorIntegraciones(seleccionadas) {
       return seleccionadas.reduce(
         (total, valor) => total + (PRECIOS.integraciones[valor] || 0),
-        0
+        0,
       );
     }
 
@@ -125,7 +125,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
       lineas.push("Hola Tony, quiero consultarte sobre este estimado:");
       lineas.push("");
-      lineas.push(`Tipo de proyecto: ${ETIQUETAS_TIPO[datos.tipo] || datos.tipo}`);
+      lineas.push(
+        `Tipo de proyecto: ${ETIQUETAS_TIPO[datos.tipo] || datos.tipo}`,
+      );
       lineas.push(`Páginas adicionales: ${datos.paginasExtra}`);
 
       if (datos.tipo === "ecommerce") {
@@ -161,8 +163,8 @@ document.addEventListener("DOMContentLoaded", function () {
           parseInt(document.getElementById("calcPaginasExtra").value, 10) || 0,
         integraciones: Array.from(
           document.querySelectorAll(
-            '#calcIntegracionesGrid input[name="integraciones"]:checked'
-          )
+            '#calcIntegracionesGrid input[name="integraciones"]:checked',
+          ),
         ).map((checkbox) => checkbox.value),
         admin: document.getElementById("calcAdmin").checked,
         productos:
@@ -189,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const mensaje = construirMensajeWhatsapp(datos, total);
       calcWhatsappBtn.href = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(
-        mensaje
+        mensaje,
       )}`;
       calcWhatsappBtn.hidden = false;
 
