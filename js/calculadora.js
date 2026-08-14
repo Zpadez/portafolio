@@ -43,6 +43,27 @@ document.addEventListener("DOMContentLoaded", function () {
     ],
   };
 
+  // 👉 Número de WhatsApp donde llegarán los estimados (formato
+  // internacional, sin "+", sin espacios ni guiones).
+  const WHATSAPP_NUMERO = "584129526003";
+
+  // Etiquetas legibles para armar el mensaje de WhatsApp.
+  const ETIQUETAS_TIPO = {
+    landing: "Landing Page",
+    portafolio: "Portafolio",
+    ecommerce: "E-commerce",
+  };
+
+  const ETIQUETAS_INTEGRACIONES = {
+    whatsapp: "Chat de WhatsApp",
+    instagram: "Perfil de Instagram",
+    pagos: "Sistema de pagos",
+    soporte: "Chat de soporte",
+    blog: "Blog",
+    foro: "Foro",
+    galeria: "Galería de imágenes",
+  };
+
   const calcForm = document.getElementById("calcForm");
   const calcTipo = document.getElementById("calcTipo");
   const calcProductosField = document.getElementById("calcProductosField");
@@ -50,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const calcResult = document.getElementById("calcResult");
   const calcResultValue = document.getElementById("calcResultValue");
   const calcResultHint = document.getElementById("calcResultHint");
+  const calcWhatsappBtn = document.getElementById("calcWhatsappBtn");
 
   if (calcForm) {
     // Muestra el campo de "cantidad de productos" solo si el tipo es
@@ -96,6 +118,40 @@ document.addEventListener("DOMContentLoaded", function () {
       return total;
     }
 
+    // Arma el texto del mensaje con todos los campos del formulario
+    // y el total, listo para enviar por WhatsApp.
+    function construirMensajeWhatsapp(datos, total) {
+      const lineas = [];
+
+      lineas.push("Hola Tony, quiero consultarte sobre este estimado:");
+      lineas.push("");
+      lineas.push(`Tipo de proyecto: ${ETIQUETAS_TIPO[datos.tipo] || datos.tipo}`);
+      lineas.push(`Páginas adicionales: ${datos.paginasExtra}`);
+
+      if (datos.tipo === "ecommerce") {
+        lineas.push(`Cantidad de productos: ${datos.productos}`);
+      }
+
+      const integracionesTexto = datos.integraciones.length
+        ? datos.integraciones
+            .map((valor) => ETIQUETAS_INTEGRACIONES[valor] || valor)
+            .join(", ")
+        : "Ninguna";
+      lineas.push(`Integraciones: ${integracionesTexto}`);
+
+      lineas.push(`Panel de administración: ${datos.admin ? "Sí" : "No"}`);
+
+      if (datos.requerimientos) {
+        lineas.push("");
+        lineas.push(`Requerimientos extras: ${datos.requerimientos}`);
+      }
+
+      lineas.push("");
+      lineas.push(`Inversión estimada: $${total.toLocaleString("es")} USD`);
+
+      return lineas.join("\n");
+    }
+
     calcForm.addEventListener("submit", (e) => {
       e.preventDefault();
 
@@ -111,12 +167,16 @@ document.addEventListener("DOMContentLoaded", function () {
         admin: document.getElementById("calcAdmin").checked,
         productos:
           parseInt(document.getElementById("calcProductos").value, 10) || 0,
+        requerimientos: document
+          .getElementById("calcRequerimientos")
+          .value.trim(),
       };
 
       if (!datos.tipo) {
         calcResult.hidden = false;
         calcResultValue.textContent = "—";
         calcResultHint.textContent = "Selecciona un tipo de proyecto.";
+        calcWhatsappBtn.hidden = true;
         return;
       }
 
@@ -126,6 +186,13 @@ document.addEventListener("DOMContentLoaded", function () {
       calcResultValue.textContent = `$${total.toLocaleString("es")} USD`;
       calcResultHint.textContent =
         "Estimado de referencia. La cotización final puede variar según el alcance real del proyecto.";
+
+      const mensaje = construirMensajeWhatsapp(datos, total);
+      calcWhatsappBtn.href = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(
+        mensaje
+      )}`;
+      calcWhatsappBtn.hidden = false;
+
       calcResult.scrollIntoView({ behavior: "smooth", block: "nearest" });
     });
   }

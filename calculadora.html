@@ -135,6 +135,19 @@
               >
             </label>
 
+            <label class="form-field">
+              <span class="field-label">Requerimientos extras</span>
+              <span class="field-hint"
+                >Cuéntame cualquier detalle adicional de tu proyecto
+                (opcional).</span
+              >
+              <textarea
+                id="calcRequerimientos"
+                rows="4"
+                placeholder="Ej: necesito que el sitio tenga varios idiomas, integración con un sistema externo, etc."
+              ></textarea>
+            </label>
+
             <button type="submit" class="btn btn--primary">
               Calcular estimado
             </button>
@@ -146,6 +159,17 @@
               >$0 USD</strong
             >
             <span class="calc-result-hint" id="calcResultHint"></span>
+            <a
+              href="#"
+              id="calcWhatsappBtn"
+              class="btn btn--primary"
+              target="_blank"
+              rel="noopener"
+              style="margin-top: 16px; display: inline-flex"
+              hidden
+            >
+              Enviar este estimado por WhatsApp
+            </a>
           </div>
         </div>
       </section>
