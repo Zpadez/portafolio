@@ -1,190 +1,307 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tony — Desarrollador Web Front-End</title>
-<meta name="description" content="Portafolio de Tony, desarrollador web front-end. Sitios a medida en HTML, CSS y JavaScript para negocios reales.">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tony — Desarrollador Web Front-End</title>
+    <meta
+      name="description"
+      content="Portafolio de Tony, desarrollador web front-end. Sitios a medida en HTML, CSS y JavaScript para negocios reales."
+    />
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
 
-<link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="blueprint-grid" aria-hidden="true"></div>
 
-<div class="blueprint-grid" aria-hidden="true"></div>
+    <header class="site-header">
+      <div class="reg-mark reg-mark--tl" aria-hidden="true">+</div>
+      <div class="reg-mark reg-mark--tr" aria-hidden="true">+</div>
 
-<header class="site-header">
-  <div class="reg-mark reg-mark--tl" aria-hidden="true">+</div>
-  <div class="reg-mark reg-mark--tr" aria-hidden="true">+</div>
+      <nav class="navbar">
+        <a href="#inicio" class="brand"
+          >TONY<span class="brand-dot">.</span
+          ><span class="brand-tag">dev</span></a
+        >
 
-  <nav class="navbar">
-    <a href="#inicio" class="brand">TONY<span class="brand-dot">.</span><span class="brand-tag">dev</span></a>
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+          aria-controls="navMenu"
+        >
+          <span></span><span></span><span></span>
+        </button>
 
-    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navMenu">
-      <span></span><span></span><span></span>
-    </button>
-
-    <ul class="nav-menu" id="navMenu">
-      <li><a href="#sobre-mi" class="nav-link">Sobre mí</a></li>
-      <li><a href="#proyectos" class="nav-link">Proyectos</a></li>
-      <li><a href="#habilidades" class="nav-link">Habilidades</a></li>
-      <li><a href="calculadora.html" class="nav-link">Calculadora</a></li>
-      <li><a href="#contacto" class="nav-link nav-link--cta">Contacto</a></li>
-    </ul>
-  </nav>
-</header>
-
-<main>
-
-  <!-- HERO -->
-  <section id="inicio" class="hero">
-    <div class="hero-copy">
-      <p class="sheet-label">HOJA 00 — PORTADA</p>
-      <h1 class="hero-title">Construyo sitios web<br>como quien traza un plano:<br><span class="accent">pieza por pieza.</span></h1>
-      <p class="hero-sub">Desarrollador front-end. Convierto ideas de negocio en sitios rápidos, a medida y sin dependencias innecesarias — HTML, CSS y JavaScript, bien construidos desde los cimientos.</p>
-      <div class="hero-actions">
-        <a href="#proyectos" class="btn btn--primary">Ver proyectos</a>
-        <a href="#contacto" class="btn btn--ghost">Hablemos</a>
-      </div>
-    </div>
-
-    <div class="hero-terminal" aria-hidden="true">
-      <div class="terminal-bar">
-        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-        <span class="terminal-title">tony@portafolio ~ </span>
-      </div>
-      <pre class="terminal-body"><code id="terminalOutput"></code><span class="cursor">▌</span></pre>
-    </div>
-  </section>
-
-  <div class="dim-divider" aria-hidden="true"><span></span><em>scroll</em><span></span></div>
-
-  <!-- SOBRE MÍ -->
-  <section id="sobre-mi" class="section reveal">
-    <p class="sheet-label">HOJA 01 — SOBRE MÍ</p>
-    <div class="about-grid">
-      <div class="about-text">
-        <h2 class="section-title">De boceto a sitio en producción.</h2>
-        <p>Trabajo junto a un estudio creativo construyendo sitios para clientes reales: barberías, academias, empresas de climatización, marcas que necesitan presencia web sólida y funcional. Mi enfoque es pragmático — la mayoría de mis proyectos son HTML, CSS y JavaScript puro, sin frameworks de por medio, porque eso es lo que la mayoría de estos negocios realmente necesita: rápido, mantenible y sin fricciones.</p>
-        <p>Cuando el proyecto lo pide, también trabajo con React (Vite), jQuery y Bootstrap. Uso Python para automatizar tareas de contenido (BeautifulSoup, ReportLab) y Cloudflare Workers cuando necesito resolver CORS sin depender de un backend completo.</p>
-      </div>
-      <ul class="about-facts">
-        <li><span class="fact-num">01</span>Sitios estáticos a medida, sin frameworks innecesarios</li>
-        <li><span class="fact-num">02</span>Integraciones con WhatsApp para reservas y contacto</li>
-        <li><span class="fact-num">03</span>Paneles de administración con persistencia en localStorage</li>
-        <li><span class="fact-num">04</span>Contenido y audiencia en español, para Latinoamérica</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- PROYECTOS -->
-  <section id="proyectos" class="section reveal">
-    <p class="sheet-label">HOJA 02 — PROYECTOS</p>
-    <h2 class="section-title">Trabajos recientes.</h2>
-
-    <div class="projects-grid">
-
-      <article class="project-card">
-        <p class="project-tag">Educación · Repostería</p>
-        <h3>Greilys Rivas Academy</h3>
-        <p class="project-desc">Escuela online de pastelería con catálogo de cursos pregrabados, venta de ebooks y carrito de compra. Sitio orientado a conversión, con testimonios de alumnas y contacto directo por WhatsApp.</p>
-        <ul class="project-stack">
-          <li>WordPress</li><li>Tienda online</li><li>WhatsApp</li>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#sobre-mi" class="nav-link">Sobre mí</a></li>
+          <li><a href="#proyectos" class="nav-link">Proyectos</a></li>
+          <li><a href="#habilidades" class="nav-link">Habilidades</a></li>
+          <li><a href="calculadora.html" class="nav-link">Calculadora</a></li>
+          <li>
+            <a href="#contacto" class="nav-link nav-link--cta">Contacto</a>
+          </li>
         </ul>
-        <a href="https://greilysrivassacademy.com/" target="_blank" rel="noopener" class="project-link">Ver sitio ↗</a>
-      </article>
+      </nav>
+    </header>
 
-      <article class="project-card">
-        <p class="project-tag">Repostería · E-commerce</p>
-        <h3>La Dolcería</h3>
-        <p class="project-desc">Tienda online de cupcakes, tortas y candy bars personalizados en Santiago de Chile, con catálogo por categorías, cursos y galería de eventos realizados.</p>
-        <ul class="project-stack">
-          <li>WordPress</li><li>WooCommerce</li><li>Catálogo por categorías</li>
-        </ul>
-      </article>
+    <main>
+      <!-- HERO -->
+      <section id="inicio" class="hero">
+        <div class="hero-copy">
+          <p class="sheet-label">HOJA 00 — PORTADA</p>
+          <h1 class="hero-title">
+            Construyo sitios web<br />como quien traza un plano:<br /><span
+              class="accent"
+              >pieza por pieza.</span
+            >
+          </h1>
+          <p class="hero-sub">
+            Desarrollador front-end. Convierto ideas de negocio en sitios
+            rápidos, a medida y sin dependencias innecesarias — HTML, CSS y
+            JavaScript, bien construidos desde los cimientos.
+          </p>
+          <div class="hero-actions">
+            <a href="#proyectos" class="btn btn--primary">Ver proyectos</a>
+            <a href="#contacto" class="btn btn--ghost">Hablemos</a>
+          </div>
+        </div>
 
-      <article class="project-card">
-        <p class="project-tag">Salud · Cirugía general</p>
-        <h3>Dr. Julio Estrada</h3>
-        <p class="project-desc">Sitio de presentación profesional para un cirujano guatemalteco especializado en cirugía general, laparoscopía avanzada y manejo de urgencias, con presencia en Panajachel y Antigua Guatemala, pensado para transmitir cercanía y confianza al paciente.</p>
-        <ul class="project-stack">
-          <li>Landing profesional</li><li>Salud</li><li>Contacto directo</li>
-        </ul>
-        <a href="https://drjulioestrada.com/" target="_blank" rel="noopener" class="project-link">Ver sitio ↗</a>
-      </article>
-    </div>
-  </section>
+        <div class="hero-terminal" aria-hidden="true">
+          <div class="terminal-bar">
+            <span class="dot"></span><span class="dot"></span
+            ><span class="dot"></span>
+            <span class="terminal-title">tony@portafolio ~ </span>
+          </div>
+          <pre
+            class="terminal-body"
+          ><code id="terminalOutput"></code><span class="cursor">▌</span></pre>
+        </div>
+      </section>
 
-  <!-- HABILIDADES -->
-  <section id="habilidades" class="section reveal">
-    <p class="sheet-label">HOJA 03 — HABILIDADES</p>
-    <h2 class="section-title">Con qué construyo.</h2>
-
-    <div class="skills-grid">
-      <div class="skill-block">
-        <h3>Frontend</h3>
-        <p>HTML5, CSS3, JavaScript (Vainilla), React + Vite, jQuery, Bootstrap 4/5, Swiper.js, animaciones con Intersection Observer.</p>
-      </div>
-      <div class="skill-block">
-        <h3>Automatización</h3>
-        <p>Python con BeautifulSoup para restructurar contenido, ReportLab para generación de PDFs.</p>
-      </div>
-      <div class="skill-block">
-        <h3>Infraestructura ligera</h3>
-        <p>Cloudflare Workers como proxy CORS, persistencia con localStorage, paneles de admin con protección por contraseña.</p>
-      </div>
-      <div class="skill-block">
-        <h3>Integraciones</h3>
-        <p>Reservas y contacto por WhatsApp, formularios de inscripción, carruseles e integraciones de video.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACTO -->
-  <section id="contacto" class="section reveal">
-    <p class="sheet-label">HOJA 05 — CONTACTO</p>
-    <div class="contact-grid">
-      <div>
-        <h2 class="section-title">¿Construimos algo?</h2>
-        <p class="hero-sub">Cuéntame sobre tu proyecto y te respondo en menos de 24 horas.</p>
-        <ul class="contact-links">
-          <li><a href="mailto:fabiodevch@gmail.com">fabiodevch@gmail.com</a></li>
-          <li><a href="https://wa.me/584129526003" target="_blank" rel="noopener">WhatsApp</a></li>
-          <li><a href="#" target="_blank" rel="noopener">GitHub</a></li>
-          <li><a href="#" target="_blank" rel="noopener">LinkedIn</a></li>
-        </ul>
+      <div class="dim-divider" aria-hidden="true">
+        <span></span><em>scroll</em><span></span>
       </div>
 
-      <form class="contact-form" id="contactForm" action="https://formspree.io/f/TU_ID_DE_FORMSPREE" method="POST" novalidate>
-        <label class="form-field">
-          <span>Nombre</span>
-          <input type="text" name="nombre" required>
-        </label>
-        <label class="form-field">
-          <span>Correo</span>
-          <input type="email" name="correo" required>
-        </label>
-        <label class="form-field">
-          <span>Mensaje</span>
-          <textarea name="mensaje" rows="4" required></textarea>
-        </label>
-        <button type="submit" class="btn btn--primary btn--full">Enviar mensaje</button>
-        <p class="form-status" id="formStatus" role="status"></p>
-      </form>
-    </div>
-  </section>
+      <!-- SOBRE MÍ -->
+      <section id="sobre-mi" class="section reveal">
+        <p class="sheet-label">HOJA 01 — SOBRE MÍ</p>
+        <div class="about-grid">
+          <div class="about-text">
+            <h2 class="section-title">De boceto a sitio en producción.</h2>
+            <p>
+              Trabajo junto a un estudio creativo construyendo sitios para
+              clientes reales: barberías, academias, empresas de climatización,
+              marcas que necesitan presencia web sólida y funcional. Mi enfoque
+              es pragmático — la mayoría de mis proyectos son HTML, CSS y
+              JavaScript puro, sin frameworks de por medio, porque eso es lo que
+              la mayoría de estos negocios realmente necesita: rápido,
+              mantenible y sin fricciones.
+            </p>
+            <p>
+              Cuando el proyecto lo pide, también trabajo con React (Vite),
+              jQuery y Bootstrap. Uso Python para automatizar tareas de
+              contenido (BeautifulSoup, ReportLab) y Cloudflare Workers cuando
+              necesito resolver CORS sin depender de un backend completo.
+            </p>
+          </div>
+          <ul class="about-facts">
+            <li>
+              <span class="fact-num">01</span>Sitios estáticos a medida, sin
+              frameworks innecesarios
+            </li>
+            <li>
+              <span class="fact-num">02</span>Integraciones con WhatsApp para
+              reservas y contacto
+            </li>
+            <li>
+              <span class="fact-num">03</span>Paneles de administración con
+              persistencia en localStorage
+            </li>
+            <li>
+              <span class="fact-num">04</span>Contenido y audiencia en español,
+              para Latinoamérica
+            </li>
+          </ul>
+        </div>
+      </section>
 
-</main>
+      <!-- PROYECTOS -->
+      <section id="proyectos" class="section reveal">
+        <p class="sheet-label">HOJA 02 — PROYECTOS</p>
+        <h2 class="section-title">Trabajos recientes.</h2>
 
-<footer class="site-footer">
-  <div class="reg-mark reg-mark--bl" aria-hidden="true">+</div>
-  <div class="reg-mark reg-mark--br" aria-hidden="true">+</div>
-  <p>© <span id="year"></span> Tony — Desarrollador Web. Hecho con HTML, CSS y JS.</p>
-</footer>
+        <div class="projects-grid">
+          <article class="project-card">
+            <p class="project-tag">Educación · Repostería</p>
+            <h3>Greilys Rivas Academy</h3>
+            <p class="project-desc">
+              Escuela online de pastelería con catálogo de cursos pregrabados,
+              venta de ebooks y carrito de compra. Sitio orientado a conversión,
+              con testimonios de alumnas y contacto directo por WhatsApp.
+            </p>
+            <ul class="project-stack">
+              <li>WordPress</li>
+              <li>Tienda online</li>
+              <li>WhatsApp</li>
+            </ul>
+            <a
+              href="https://greilysrivassacademy.com/"
+              target="_blank"
+              rel="noopener"
+              class="project-link"
+              >Ver sitio ↗</a
+            >
+          </article>
 
-<script src="js/main.js"></script>
-</body>
+          <article class="project-card">
+            <p class="project-tag">Repostería · E-commerce</p>
+            <h3>La Dolcería</h3>
+            <p class="project-desc">
+              Tienda online de cupcakes, tortas y candy bars personalizados en
+              Santiago de Chile, con catálogo por categorías, cursos y galería
+              de eventos realizados.
+            </p>
+            <ul class="project-stack">
+              <li>WordPress</li>
+              <li>WooCommerce</li>
+              <li>Catálogo por categorías</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <p class="project-tag">Salud · Cirugía general</p>
+            <h3>Dr. Julio Estrada</h3>
+            <p class="project-desc">
+              Sitio de presentación profesional para un cirujano guatemalteco
+              especializado en cirugía general, laparoscopía avanzada y manejo
+              de urgencias, con presencia en Panajachel y Antigua Guatemala,
+              pensado para transmitir cercanía y confianza al paciente.
+            </p>
+            <ul class="project-stack">
+              <li>Landing profesional</li>
+              <li>Salud</li>
+              <li>Contacto directo</li>
+            </ul>
+            <a
+              href="https://drjulioestrada.com/"
+              target="_blank"
+              rel="noopener"
+              class="project-link"
+              >Ver sitio ↗</a
+            >
+          </article>
+        </div>
+      </section>
+
+      <!-- HABILIDADES -->
+      <section id="habilidades" class="section reveal">
+        <p class="sheet-label">HOJA 03 — HABILIDADES</p>
+        <h2 class="section-title">Con qué construyo.</h2>
+
+        <div class="skills-grid">
+          <div class="skill-block">
+            <h3>Frontend</h3>
+            <p>
+              HTML5, CSS3, JavaScript (Vainilla), React + Vite, jQuery,
+              Bootstrap 4/5, Swiper.js, animaciones con Intersection Observer.
+            </p>
+          </div>
+          <div class="skill-block">
+            <h3>Automatización</h3>
+            <p>
+              Python con BeautifulSoup para restructurar contenido, ReportLab
+              para generación de PDFs.
+            </p>
+          </div>
+          <div class="skill-block">
+            <h3>Infraestructura ligera</h3>
+            <p>
+              Cloudflare Workers como proxy CORS, persistencia con localStorage,
+              paneles de admin con protección por contraseña.
+            </p>
+          </div>
+          <div class="skill-block">
+            <h3>Integraciones</h3>
+            <p>
+              Reservas y contacto por WhatsApp, formularios de inscripción,
+              carruseles e integraciones de video.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACTO -->
+      <section id="contacto" class="section reveal">
+        <p class="sheet-label">HOJA 04 — CONTACTO</p>
+        <div class="contact-grid">
+          <div>
+            <h2 class="section-title">¿Construimos algo?</h2>
+            <p class="hero-sub">
+              Cuéntame sobre tu proyecto y te respondo en menos de 24 horas.
+            </p>
+            <ul class="contact-links">
+              <li>
+                <a href="mailto:fabiodevch@gmail.com">fabiodevch@gmail.com</a>
+              </li>
+              <li>
+                <a
+                  href="https://wa.me/584129526003"
+                  target="_blank"
+                  rel="noopener"
+                  >WhatsApp</a
+                >
+              </li>
+              <li><a href="#" target="_blank" rel="noopener">GitHub</a></li>
+              <li><a href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+            </ul>
+          </div>
+
+          <form
+            class="contact-form"
+            id="contactForm"
+            action="https://formspree.io/f/TU_ID_DE_FORMSPREE"
+            method="POST"
+            novalidate
+          >
+            <label class="form-field">
+              <span>Nombre</span>
+              <input type="text" name="nombre" required />
+            </label>
+            <label class="form-field">
+              <span>Correo</span>
+              <input type="email" name="correo" required />
+            </label>
+            <label class="form-field">
+              <span>Mensaje</span>
+              <textarea name="mensaje" rows="4" required></textarea>
+            </label>
+            <button type="submit" class="btn btn--primary btn--full">
+              Enviar mensaje
+            </button>
+            <p class="form-status" id="formStatus" role="status"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="reg-mark reg-mark--bl" aria-hidden="true">+</div>
+      <div class="reg-mark reg-mark--br" aria-hidden="true">+</div>
+      <p>
+        © <span id="year"></span> Tony — Desarrollador Web. Hecho con HTML, CSS
+        y JS.
+      </p>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
 </html>
