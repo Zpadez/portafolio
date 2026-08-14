@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ecommerce: 80,
     },
     porPaginaExtra: 5,
-    // Precio por cada integración seleccionada. Puedes darle otro
+    // Precio por cada integración seleccionada. Puedes darle un
     // valor distinto a cada una según su complejidad real.
     integraciones: {
       whatsapp: 2,
