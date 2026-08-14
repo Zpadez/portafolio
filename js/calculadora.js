@@ -24,13 +24,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // Precio por cada integración seleccionada. Puedes darle un
     // valor distinto a cada una según su complejidad real.
     integraciones: {
-      whatsapp: 2,
-      instagram: 2,
-      pagos: 2,
-      soporte: 2,
-      blog: 2,
-      foro: 2,
-      galeria: 2,
+      whatsapp: 10,
+      instagram: 10,
+      pagos: 30,
+      soporte: 40,
+      blog: 15,
+      foro: 15,
+      galeria: 15,
     },
     panelAdmin: 30,
     // Tramos de productos para e-commerce: se usa el primer tramo
