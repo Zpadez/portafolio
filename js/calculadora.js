@@ -15,10 +15,19 @@ document.addEventListener("DOMContentLoaded", function () {
      por tus tarifas reales en el objeto PRECIOS de abajo.
   ------------------------------------------ */
   const PRECIOS = {
+    // Planes de mantenimiento/soporte mensual — se suman aparte del
+    // costo del proyecto (son un cargo recurrente, no único).
+    planes: {
+      basico: 40,
+      avanzado: 60,
+      plus: 100,
+    },
     base: {
       landing: 30,
-      portafolio: 50,
-      ecommerce: 80,
+      portafolio: 60,
+      ecommerce: 120,
+      adicion: 40,
+      actualizacion: 100,
     },
     porPaginaExtra: 5,
     // Precio por cada integración seleccionada. Puedes darle un
@@ -54,6 +63,12 @@ document.addEventListener("DOMContentLoaded", function () {
     ecommerce: "E-commerce",
   };
 
+  const ETIQUETAS_PLAN = {
+    basico: "Plan Básico",
+    avanzado: "Plan Avanzado",
+    plus: "Plan Plus",
+  };
+
   const ETIQUETAS_INTEGRACIONES = {
     whatsapp: "Chat de WhatsApp",
     instagram: "Perfil de Instagram",
@@ -65,6 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   const calcForm = document.getElementById("calcForm");
+  const calcPlan = document.getElementById("calcPlan");
   const calcTipo = document.getElementById("calcTipo");
   const calcProductosField = document.getElementById("calcProductosField");
   const calcProductosInput = document.getElementById("calcProductos");
@@ -98,6 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function calcularEstimado({
+      plan,
       tipo,
       paginasExtra,
       integraciones,
@@ -106,6 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }) {
       let total = PRECIOS.base[tipo] || 0;
 
+      total += PRECIOS.planes[plan] || 0;
       total += paginasExtra * PRECIOS.porPaginaExtra;
       total += costoPorIntegraciones(integraciones);
 
@@ -125,6 +143,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       lineas.push("Hola Tony, quiero consultarte sobre este estimado:");
       lineas.push("");
+      lineas.push(`Plan mensual: ${ETIQUETAS_PLAN[datos.plan] || datos.plan}`);
       lineas.push(
         `Tipo de proyecto: ${ETIQUETAS_TIPO[datos.tipo] || datos.tipo}`,
       );
@@ -158,6 +177,7 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault();
 
       const datos = {
+        plan: calcPlan.value,
         tipo: calcTipo.value,
         paginasExtra:
           parseInt(document.getElementById("calcPaginasExtra").value, 10) || 0,
@@ -174,10 +194,12 @@ document.addEventListener("DOMContentLoaded", function () {
           .value.trim(),
       };
 
-      if (!datos.tipo) {
+      if (!datos.plan || !datos.tipo) {
         calcResult.hidden = false;
         calcResultValue.textContent = "—";
-        calcResultHint.textContent = "Selecciona un tipo de proyecto.";
+        calcResultHint.textContent = !datos.plan
+          ? "Selecciona un plan mensual."
+          : "Selecciona un tipo de proyecto.";
         calcWhatsappBtn.hidden = true;
         return;
       }

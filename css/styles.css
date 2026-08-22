@@ -408,22 +408,100 @@ ul {
 ============================================ */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
   gap: 24px;
+}
+
+/* La primera tarjeta ocupa las dos filas — la "destacada" */
+.project-card:first-child {
+  grid-row: 1 / 3;
+}
+.project-card:first-child .project-thumb {
+  aspect-ratio: 4 / 3;
 }
 
 .project-card {
   background: var(--panel-navy);
   border: 1px solid var(--line-cyan-dim);
   border-radius: var(--radius);
-  padding: 28px;
+  overflow: hidden;
   transition:
     border-color 0.2s ease,
-    transform 0.2s ease;
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
 }
+
+/* La 2ª y 3ª tarjeta se acomodan en columna, formato horizontal */
+.project-card:nth-child(2),
+.project-card:nth-child(3) {
+  flex-direction: row;
+}
+.project-card:nth-child(2) .project-thumb,
+.project-card:nth-child(3) .project-thumb {
+  aspect-ratio: auto;
+  min-width: 160px;
+  max-width: 190px;
+  flex-shrink: 0;
+}
+
+/* La última tarjeta ocupa todo el ancho, formato horizontal (como el 4º ítem de tooplate) */
+.project-card:nth-child(4) {
+  grid-column: 1 / -1;
+  flex-direction: row;
+}
+.project-card:nth-child(4) .project-thumb {
+  aspect-ratio: auto;
+  min-width: 160px;
+  max-width: 190px;
+  flex-shrink: 0;
+}
+
 .project-card:hover {
   border-color: var(--line-cyan);
   transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.project-thumb {
+  aspect-ratio: 16 / 10;
+  background: var(--ink-navy);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.project-thumb-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  background-image:
+    linear-gradient(var(--line-cyan-dim) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-cyan-dim) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+.project-thumb-icon {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: var(--copper-bright);
+  opacity: 0.85;
+}
+
+.project-info {
+  padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .project-tag {
@@ -470,7 +548,7 @@ ul {
   border-bottom: 1px solid transparent;
 }
 .project-link:hover {
-  border-color: var(--copper-bright);
+  text-decoration: none;
 }
 
 /* ============================================
@@ -509,43 +587,10 @@ ul {
 .calc-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 22px 24px;
-  margin-bottom: 28px;
-  align-items: stretch;
+  gap: 18px;
+  margin-bottom: 24px;
 }
-
-/* Every field shares the same internal structure (label / hint / control),
-   so every row lines up even when a hint is short, long, or absent. */
-.calc-grid .form-field {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-/* Higher specificity than the rule above on purpose: without this, a
-   field's own [hidden] attribute loses to .calc-grid .form-field's
-   display:flex and the field never actually disappears. */
-.calc-grid .form-field[hidden] {
-  display: none;
-}
-.calc-grid .field-label {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--slate);
-  margin-bottom: 8px;
-}
-.calc-grid .field-hint {
-  display: block;
-  font-family: var(--font-body);
-  font-size: 0.78rem;
-  line-height: 1.4;
-  color: var(--slate);
-  opacity: 0.75;
-  min-height: 2.2em;
-  margin-bottom: 8px;
-}
-.calc-grid select,
-.calc-grid input[type="number"] {
-  margin-top: auto;
+.calc-grid select {
   font-family: var(--font-body);
   font-size: 0.95rem;
   background: var(--ink-navy);
@@ -553,169 +598,24 @@ ul {
   border-radius: var(--radius);
   padding: 12px 14px;
   color: var(--paper);
-  width: 100%;
 }
-.calc-grid select:focus,
-.calc-grid input[type="number"]:focus {
+.calc-grid select:focus {
   border-color: var(--line-cyan);
   outline: none;
 }
 
-/* Integraciones extra — grupo de checkboxes a todo el ancho, fuera
-   de la grilla de 2 columnas para dejarles espacio a los textos. */
-.calc-check-section {
-  margin-bottom: 28px;
-}
-.calc-check-section .field-label {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--slate);
-  margin-bottom: 8px;
-}
-.calc-check-section .field-hint {
-  display: block;
-  font-family: var(--font-body);
-  font-size: 0.78rem;
-  line-height: 1.4;
-  color: var(--slate);
-  opacity: 0.75;
-  margin-bottom: 14px;
-}
-
-.calc-check-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px 24px;
-}
-
-.calc-check {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-.calc-check input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-}
-.calc-check-box {
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-  margin-top: 1px;
-  border-radius: 4px;
-  background: var(--ink-navy);
-  border: 1px solid var(--line-cyan-dim);
-  position: relative;
-  transition:
-    background 0.2s ease,
-    border-color 0.2s ease;
-}
-.calc-check-box::after {
-  content: "";
-  position: absolute;
-  left: 6px;
-  top: 2px;
-  width: 5px;
-  height: 10px;
-  border: solid var(--paper);
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-  opacity: 0;
-  transition: opacity 0.15s ease;
-}
-.calc-check input:checked + .calc-check-box {
-  background: var(--copper);
-  border-color: var(--copper-bright);
-}
-.calc-check input:checked + .calc-check-box::after {
-  opacity: 1;
-}
-.calc-check input:focus-visible + .calc-check-box {
-  outline: 2px solid var(--copper-bright);
-  outline-offset: 3px;
-}
-.calc-check:hover .calc-check-box {
-  border-color: var(--line-cyan);
-}
-.calc-check-text {
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  color: var(--paper);
-  line-height: 1.4;
-}
-.calc-check-note {
-  display: block;
-  font-size: 0.78rem;
-  color: var(--slate);
-  opacity: 0.8;
-  margin-top: 2px;
-}
-
-/* Admin panel toggle — its own full-width row, switch and label side by side */
-.calc-toggle {
-  display: flex;
+.calc-checkbox {
+  flex-direction: row;
   align-items: center;
-  gap: 12px;
-  width: fit-content;
-  margin-bottom: 24px;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
+  gap: 10px;
+  font-family: var(--font-body);
+  color: var(--paper);
+  font-size: 0.95rem;
 }
-.calc-toggle input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-}
-.calc-toggle-track {
-  flex-shrink: 0;
-  width: 40px;
-  height: 24px;
-  border-radius: 999px;
-  background: var(--ink-navy);
-  border: 1px solid var(--line-cyan-dim);
-  position: relative;
-  transition:
-    background 0.2s ease,
-    border-color 0.2s ease;
-}
-.calc-toggle-thumb {
-  position: absolute;
-  top: 2px;
-  left: 2px;
+.calc-checkbox input {
   width: 18px;
   height: 18px;
-  border-radius: 50%;
-  background: var(--slate);
-  transition:
-    transform 0.2s ease,
-    background 0.2s ease;
-}
-.calc-toggle input:checked + .calc-toggle-track {
-  background: var(--copper);
-  border-color: var(--copper-bright);
-}
-.calc-toggle input:checked + .calc-toggle-track .calc-toggle-thumb {
-  transform: translateX(16px);
-  background: var(--paper);
-}
-.calc-toggle input:focus-visible + .calc-toggle-track {
-  outline: 2px solid var(--copper-bright);
-  outline-offset: 3px;
-}
-.calc-toggle-text {
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  color: var(--paper);
+  accent-color: var(--copper-bright);
 }
 
 .calc-result {
@@ -741,6 +641,124 @@ ul {
 .calc-result-hint {
   color: var(--slate);
   font-size: 0.88rem;
+}
+
+/* ============================================
+   SKILL BARS + TECH STACK
+============================================ */
+.skill-bars-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 48px;
+  margin-top: 48px;
+}
+
+.skill-bar-category h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line-cyan-dim);
+}
+
+.skill-bar {
+  margin-bottom: 20px;
+}
+
+.skill-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.skill-bar-name {
+  font-size: 0.9rem;
+  color: var(--paper);
+}
+
+.skill-bar-pct {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--slate);
+}
+
+.skill-bar-track {
+  width: 100%;
+  height: 4px;
+  background: var(--line-cyan-dim);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--line-cyan), var(--copper-bright));
+}
+
+/* La barra solo "carga" cuando la sección entra en pantalla,
+   reutilizando la clase .is-visible que ya agrega el observer de scroll. */
+.reveal.is-visible .skill-bar-fill {
+  width: var(--w);
+  animation: barFill 1.1s ease-out forwards;
+}
+
+@keyframes barFill {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--w);
+  }
+}
+
+.tech-stack {
+  margin-top: 48px;
+}
+
+.tech-stack h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line-cyan-dim);
+}
+
+.tech-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tech-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: var(--panel-navy);
+  border: 1px solid var(--line-cyan-dim);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--slate);
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+.tech-icon:hover {
+  border-color: var(--line-cyan);
+  color: var(--paper);
+  transform: translateY(-2px);
+}
+.tech-icon svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
 }
 
 /* ============================================
@@ -813,10 +831,6 @@ ul {
   margin: 0;
 }
 
-.calc-form button[type="submit"] {
-  margin-top: 12px;
-}
-
 /* ============================================
    FOOTER
 ============================================ */
@@ -844,6 +858,27 @@ ul {
   .projects-grid {
     grid-template-columns: 1fr;
   }
+  .project-card:first-child {
+    grid-row: auto;
+  }
+  .project-card:nth-child(2),
+  .project-card:nth-child(3) {
+    flex-direction: column;
+  }
+  .project-card:nth-child(2) .project-thumb,
+  .project-card:nth-child(3) .project-thumb {
+    aspect-ratio: 16 / 10;
+    max-width: none;
+    min-width: 0;
+  }
+  .project-card:nth-child(4) {
+    flex-direction: column;
+  }
+  .project-card:nth-child(4) .project-thumb {
+    aspect-ratio: 16 / 10;
+    max-width: none;
+    min-width: 0;
+  }
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -853,11 +888,9 @@ ul {
   .calc-grid {
     grid-template-columns: 1fr;
   }
-  .calc-check-grid {
+  .skill-bars-grid {
     grid-template-columns: 1fr;
-  }
-  .calc-grid .field-hint {
-    min-height: 0;
+    gap: 32px;
   }
 }
 
@@ -908,5 +941,9 @@ ul {
   }
   .btn:hover {
     transform: none;
+  }
+  .skill-bar-fill {
+    width: var(--w);
+    animation: none;
   }
 }

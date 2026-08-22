@@ -24,7 +24,7 @@
     <main>
       <!-- CALCULADORA DE SERVICIOS -->
       <section id="calculadora" class="section">
-        <h2 class="section-title">Estima tu proyectos.</h2>
+        <h2 class="section-title">Estima tu proyecto.</h2>
         <p class="hero-sub" style="margin-bottom: 32px">
           Una referencia rápida de inversión según el tipo de sitio que
           necesitas. Es una estimación, no una cotización cerrada — para eso,
@@ -35,29 +35,33 @@
           <form id="calcForm" class="calc-form">
             <div class="calc-grid">
               <label class="form-field">
+                <span class="field-label">Planes mensuales</span>
+                <span class="field-hint"></span>
+                <select id="calcPlan" required>
+                  <option value="" disabled selected>Selecciona un tipo</option>
+                  <option value="basico">Plan Básico $40USD</option>
+                  <option value="avanzado">Plan Avanzado $60USD</option>
+                  <option value="plus">Plan Plus $100USD</option>
+                </select>
+              </label>
+
+              <label class="form-field">
                 <span class="field-label">Tipo de proyecto</span>
                 <span class="field-hint"></span>
                 <select id="calcTipo" required>
                   <option value="" disabled selected>Selecciona un tipo</option>
                   <option value="landing">Landing Page $30USD</option>
-                  <option value="portafolio">Portafolio $30USD</option>
-                  <option value="ecommerce">E-commerce $30USD</option>
+                  <option value="portafolio">Portafolio $60USD</option>
+                  <option value="ecommerce">E-commerce $120USD</option>
+                  <option value="adicion">
+                    Agregar información nueva $40USD
+                  </option>
+                  <option value="actualizacion">
+                    Actualización del sitio $100USD (el precio mostrado es un
+                    estimado, puede variar dependiendo de la complejidad del
+                    trabajo)
+                  </option>
                 </select>
-              </label>
-
-              <label class="form-field">
-                <span class="field-label">Páginas adicionales</span>
-                <span class="field-hint"
-                  >Páginas extras para información adicional en la web, ejemplo:
-                  Blog, Galería, Foros, etc.</span
-                >
-                <input
-                  type="number"
-                  id="calcPaginasExtra"
-                  min="0"
-                  step="1"
-                  value="0"
-                />
               </label>
 
               <div class="form-field" id="calcProductosField" hidden>
@@ -73,6 +77,21 @@
                   value="0"
                 />
               </div>
+
+              <label class="form-field">
+                <span class="field-label">Páginas adicionales</span>
+                <span class="field-hint"
+                  >Páginas extras para información adicional en la web, ejemplo:
+                  Blog, Galería, Foros, etc.</span
+                >
+                <input
+                  type="number"
+                  id="calcPaginasExtra"
+                  min="0"
+                  step="1"
+                  value="0"
+                />
+              </label>
             </div>
 
             <div class="calc-check-section">
